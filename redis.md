@@ -4,7 +4,7 @@
 
 #### 1、set
 
-##### 设置key 对应的值为string 类型的value
+设置key 对应的值为string 类型的value
 
 ```
 127.0.0.1:6379[1]> set name leilanjie
@@ -15,7 +15,7 @@ OK
 
 #### 2、setnx
 
-##### 设置key 对应的值为string 类型的value。如果key 已经存在，返回0，nx 是not exist 的意思
+设置key 对应的值为string 类型的value。如果key 已经存在，返回0，nx 是not exist 的意思
 
 ```
 127.0.0.1:6379[1]> setnx name leilanjie_new
@@ -24,7 +24,7 @@ OK
 
 #### 3、setex
 
-##### 设置key 对应的值为string 类型的value，并指定此键值对应的有效期
+设置key 对应的值为string 类型的value，并指定此键值对应的有效期
 
 ```
 127.0.0.1:6379[1]> setex haircolor 10 red
@@ -37,7 +37,7 @@ OK
 
 #### 4、setrange
 
-##### 设置指定key 的value 值的子字符串
+设置指定key 的value 值的子字符串
 
 ```
 127.0.0.1:6379[1]> set email leilanjie@qq.com
@@ -50,7 +50,7 @@ OK
 
 #### 5、mset
 
-##### 一次设置多个key 的值，成功返回ok 表示所有的值都设置了，失败返回0 表示没有任何值被设置
+一次设置多个key 的值，成功返回ok 表示所有的值都设置了，失败返回0 表示没有任何值被设置
 
 ```
 127.0.0.1:6379[1]> mset key1 leilanjie1 key2 leilanjie2
@@ -59,7 +59,7 @@ OK
 
 #### 6、msetnx
 
-##### 一次设置多个key 的值，成功返回ok 表示所有的值都设置了，失败返回0 表示没有任何值被设置，但是不会覆盖已经存在的key
+一次设置多个key 的值，成功返回ok 表示所有的值都设置了，失败返回0 表示没有任何值被设置，但是不会覆盖已经存在的key
 
 ```
 127.0.0.1:6379[1]> msetnx key2 leilanjie_new key3 leilanjie3
@@ -68,11 +68,11 @@ OK
 
 #### 7、get
 
-##### 获取key 对应的string 值,如果key 不存在返回nil
+获取key 对应的string 值,如果key 不存在返回nil
 
 #### 8、getset
 
-##### 设置key 的值，并返回key 的旧值
+设置key 的值，并返回key 的旧值
 
 ```
 127.0.0.1:6379[1]> getset name leilanjie_new
@@ -83,7 +83,7 @@ OK
 
 #### 9、getrange
 
-##### 获取指定key 的value 值的子字符串
+获取指定key 的value 值的子字符串
 
 ```
 127.0.0.1:6379[1]> get name
@@ -96,7 +96,7 @@ OK
 
 #### 10、mget
 
-##### 一次获取多个key 的值，如果对应key 不存在，则对应返回nil
+一次获取多个key 的值，如果对应key 不存在，则对应返回nil
 
 ```
 127.0.0.1:6379[1]> mget key1 key2 key3
@@ -107,7 +107,7 @@ OK
 
 #### 11、incr
 
-##### 对key 的值做加加操作,并返回新的值, incr 一个不是int 的value 会返回错误，incr 一个不存在的key，则设置key 为1
+对key 的值做加加操作,并返回新的值, incr 一个不是int 的value 会返回错误，incr 一个不存在的key，则设置key 为1
 
 ```
 127.0.0.1:6379[1]> set age 20
@@ -118,7 +118,7 @@ OK
 
 #### 12、incrby
 
-##### 同incr 类似，加指定值 ，key 不存在时候会设置key，并认为原来的value 是 0
+同incr 类似，加指定值 ，key 不存在时候会设置key，并认为原来的value 是 0
 
 ```
 127.0.0.1:6379[1]> incrby age 5
@@ -127,7 +127,7 @@ OK
 
 #### 13、decr
 
-##### 对key 的值做的是减减操作，decr 一个不存在key，则设置key 为-1
+对key 的值做的是减减操作，decr 一个不存在key，则设置key 为-1
 
 ```
 127.0.0.1:6379[1]> decr age
@@ -136,7 +136,7 @@ OK
 
 #### 14、decrby
 
-##### 同decr，减指定值
+同decr，减指定值
 
 ```
 127.0.0.1:6379[1]> decrby age 5
@@ -147,7 +147,7 @@ OK
 
 #### 15、append
 
-##### 给指定key 的字符串值追加value,返回新字符串值的长度
+给指定key 的字符串值追加value,返回新字符串值的长度
 
 ```
 127.0.0.1:6379[1]> append name @163.com
@@ -158,7 +158,7 @@ OK
 
 #### 16、strlen
 
-##### 取指定key 的value 值的长度
+取指定key 的value 值的长度
 
 ```
 127.0.0.1:6379[1]> strlen name
@@ -169,7 +169,7 @@ OK
 
 #### 1、hset
 
-##### 设置hash field 为指定值，如果key 不存在，则先创建
+设置hash field 为指定值，如果key 不存在，则先创建
 
 ```
 127.0.0.1:6379[1]> hset myhash field1 hello
@@ -178,7 +178,7 @@ OK
 
 #### 2、hsetnx
 
-##### 设置hash field 为指定值，如果key 不存在，则先创建。如果field 已经存在，返回0，nx 是not exist 的意思
+设置hash field 为指定值，如果key 不存在，则先创建。如果field 已经存在，返回0，nx 是not exist 的意思
 
 ```
 127.0.0.1:6379[1]> hsetnx myhash field "hello"
@@ -189,7 +189,7 @@ OK
 
 #### 3、hmset
 
-##### 同时设置hash 的多个field
+同时设置hash 的多个field
 
 ```
 127.0.0.1:6379[1]> hmset myhash field1 hello field2 world
@@ -198,7 +198,7 @@ OK
 
 #### 4、hget
 
-##### 获取指定的hash field
+获取指定的hash field
 
 ```
 127.0.0.1:6379[1]> hget myhash field1
@@ -207,7 +207,7 @@ OK
 
 #### 5、hmget
 
-##### 获取全部指定的hash filed
+获取全部指定的hash filed
 
 ```
 127.0.0.1:6379[1]> hmget myhash field1 field2 field3
@@ -218,7 +218,7 @@ OK
 
 #### 6、hincrby
 
-##### 指定的hash filed 加上给定值
+指定的hash filed 加上给定值
 
 ```
 127.0.0.1:6379[1]> hset myhash field3 20
@@ -231,7 +231,7 @@ OK
 
 #### 7、hexists
 
-##### 测试指定field 是否存在
+测试指定field 是否存在
 
 ```
 127.0.0.1:6379[1]> hexists myhash field3
@@ -240,7 +240,7 @@ OK
 
 #### 8、hlen
 
-##### 返回指定hash 的field 数量
+返回指定hash 的field 数量
 
 ```
 127.0.0.1:6379[1]> hlen myhash
@@ -249,7 +249,7 @@ OK
 
 #### 9、hdel
 
-##### 删除指定hash的field
+删除指定hash的field
 
 ```
 127.0.0.1:6379[1]> hdel myhash field
@@ -258,7 +258,7 @@ OK
 
 #### 10、hkeys
 
-##### 返回hash 的所有field
+返回hash 的所有field
 
 ```
 127.0.0.1:6379[1]> hkeys myhash
@@ -269,7 +269,7 @@ OK
 
 #### 11、hvals
 
-##### 返回hash 的所有value
+返回hash 的所有value
 
 ```
 127.0.0.1:6379[1]> hvals myhash
@@ -280,7 +280,7 @@ OK
 
 #### 12、hgetall
 
-##### 获取某个hash 中全部的filed 及value
+获取某个hash 中全部的filed 及value
 
 ```
 127.0.0.1:6379[1]> hgetall myhash
@@ -296,7 +296,7 @@ OK
 
 #### 1、lpush  
 
-##### 在key 对应list 的头部添加字符串元素
+在key 对应list 的头部添加字符串元素
 
 ```
 127.0.0.1:6379> lpush mylist "world"
@@ -312,7 +312,7 @@ OK
 
 #### 2、rpush
 
-##### 在key 对应list 的尾部添加字符串元素
+在key 对应list 的尾部添加字符串元素
 
 ```
 127.0.0.1:6379> rpush mylist2 "hello"
@@ -326,7 +326,7 @@ OK
 
 #### 3、linsert
 
-##### 在key 对应list 的特定位置之前或之后添加字符串元素
+在key 对应list 的特定位置之前或之后添加字符串元素
 
 ```
 127.0.0.1:6379> rpush mylist3 "hello"
@@ -343,7 +343,7 @@ OK
 
 #### 4、lset
 
-##### 设置list 中指定下标的元素值(下标从0 开始)
+设置list 中指定下标的元素值(下标从0 开始)
 
 ```
 127.0.0.1:6379> rpush mylist4 "one"
@@ -359,9 +359,9 @@ OK
 
 #### 5、lrem
 
-##### 从key 对应list 中删除count 个和value 相同的元素。
+从key 对应list 中删除count 个和value 相同的元素。
 
-##### count>0 时，按从头到尾的顺序删除，具体如下:
+count>0 时，按从头到尾的顺序删除，具体如下:
 
 ```
 127.0.0.1:6379> rpush mylist5 "hello"
@@ -379,7 +379,7 @@ OK
 2) "hello"
 ```
 
-##### count<0 时，按从尾到头的顺序删除
+count<0 时，按从尾到头的顺序删除
 
 ```
 127.0.0.1:6379> rpush mylist6 "hello"
@@ -397,7 +397,7 @@ OK
 2) "foo"
 ```
 
-##### count=0 时，删除全部
+count=0 时，删除全部
 
 ```
 127.0.0.1:6379> rpush mylist7 "hello"
@@ -416,7 +416,7 @@ OK
 
 #### 6、ltrim
 
-##### 保留指定key 的值范围内的数据
+保留指定key 的值范围内的数据
 
 ```
 127.0.0.1:6379> rpush mylist8 "one"
@@ -437,7 +437,7 @@ OK
 
 #### 7、lpop
 
-##### 从list 的头部删除元素，并返回删除元素
+从list 的头部删除元素，并返回删除元素
 
 ```
 127.0.0.1:6379> lrange mylist 0 -1
@@ -453,7 +453,7 @@ OK
 
 #### 8、rpop
 
-##### 从list 的尾部删除元素，并返回删除元素
+从list 的尾部删除元素，并返回删除元素
 
 ```
 127.0.0.1:6379> rpop mylist
@@ -464,7 +464,7 @@ OK
 
 #### 9、rpoplpush
 
-##### 从第一个list 的尾部移除元素并添加到第二个list 的头部,最后返回被移除的元素值，整个操作是原子的.如果第一个list 是空或者不存在返回nil
+从第一个list 的尾部移除元素并添加到第二个list 的头部,最后返回被移除的元素值，整个操作是原子的.如果第一个list 是空或者不存在返回nil
 
 ```
 127.0.0.1:6379> lrange mylist5 0 -1
@@ -485,7 +485,7 @@ OK
 
 #### 10、lindex
 
-##### 返回名称为key 的list 中index 位置的元素
+返回名称为key 的list 中index 位置的元素
 
 ```
 127.0.0.1:6379> lrange mylist6 0 -1
@@ -498,7 +498,7 @@ OK
 
 #### 11、llen
 
-##### 返回key 对应list 的长度
+返回key 对应list 的长度
 
 ```
 127.0.0.1:6379> llen mylist6
@@ -509,7 +509,7 @@ OK
 
 #### 1、sadd
 
-##### 向名称为key 的set 中添加元素
+向名称为key 的set 中添加元素
 
 ```
 127.0.0.1:6379> sadd myset "hello"
@@ -527,7 +527,7 @@ smembers来查看myset中的所有元素
 
 #### 2、srem
 
-##### 删除名称为key 的set 中的元素member
+删除名称为key 的set 中的元素member
 
 ```
 127.0.0.1:6379> srem myset "world"
@@ -538,7 +538,7 @@ smembers来查看myset中的所有元素
 
 #### 3、spop
 
-##### 随机返回并删除名称为key 的set 中一个元素
+随机返回并删除名称为key 的set 中一个元素
 
 ```
 127.0.0.1:6379> sadd myset1 "one"
@@ -551,7 +551,7 @@ smembers来查看myset中的所有元素
 
 #### 4、sdiff
 
-##### 返回所有给定key 与第一个key 的差集
+返回所有给定key 与第一个key 的差集
 
 ```
 127.0.0.1:6379> smembers myset1
@@ -567,7 +567,7 @@ smembers来查看myset中的所有元素
 
 #### 5、sdiffstore
 
-##### 返回所有给定key 与第一个key 的差集，并将结果存为另一个key
+返回所有给定key 与第一个key 的差集，并将结果存为另一个key
 
 ```
 127.0.0.1:6379> sdiffstore myset2 myset1 myset
@@ -578,7 +578,7 @@ smembers来查看myset中的所有元素
 
 #### 6、sinter
 
-##### 返回所有给定key 的交集
+返回所有给定key 的交集
 
 ```
 127.0.0.1:6379> sinter myset myset1
@@ -587,7 +587,7 @@ smembers来查看myset中的所有元素
 
 #### 7、sinterstore
 
-##### 返回所有给定key 的交集，并将结果存为另一个key
+返回所有给定key 的交集，并将结果存为另一个key
 
 ```
 127.0.0.1:6379> sinterstore myset2 myset myset1
@@ -598,7 +598,7 @@ smembers来查看myset中的所有元素
 
 #### 8、sunion
 
-##### 返回所有给定key 的并集
+返回所有给定key 的并集
 
 ```
 127.0.0.1:6379> sunion myset myset1
@@ -608,7 +608,7 @@ smembers来查看myset中的所有元素
 
 #### 9、sunionstore
 
-##### 返回所有给定key 的并集，并将结果存为另一个key
+返回所有给定key 的并集，并将结果存为另一个key
 
 ```
 127.0.0.1:6379> sunionstore myset3 myset myset1
@@ -620,7 +620,7 @@ smembers来查看myset中的所有元素
 
 #### 10、smove
 
-##### 从第一个key 对应的set 中移除member 并添加到第二个对应set 中
+从第一个key 对应的set 中移除member 并添加到第二个对应set 中
 
 ```
 127.0.0.1:6379> smove myset2 myset4 hello
@@ -631,7 +631,7 @@ smembers来查看myset中的所有元素
 
 #### 11、scard
 
-##### 返回名称为key 的set 的元素个数
+返回名称为key 的set 的元素个数
 
 ```
 127.0.0.1:6379> scard myset4
@@ -640,7 +640,7 @@ smembers来查看myset中的所有元素
 
 #### 12、sismember
 
-##### 测试member 是否是名称为key 的set 的元素
+测试member 是否是名称为key 的set 的元素
 
 ```
 127.0.0.1:6379> sismember myset4 hello
@@ -651,7 +651,7 @@ smembers来查看myset中的所有元素
 
 #### 13、srandmember
 
-##### 随机返回名称为key 的set 的一个元素，但是不删除元素
+随机返回名称为key 的set 的一个元素，但是不删除元素
 
 ```
 127.0.0.1:6379> srandmember myset3
@@ -662,7 +662,7 @@ smembers来查看myset中的所有元素
 
 #### 1、zadd
 
-##### 向名称为key 的zset 中添加元素member，score 用于排序。如果该元素已经存在，则根据score 更新该元素的顺序
+向名称为key 的zset 中添加元素member，score 用于排序。如果该元素已经存在，则根据score 更新该元素的顺序
 
 ```
 127.0.0.1:6379> zadd myzset 1 "one"
@@ -682,7 +682,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 2、zrem
 
-##### 删除名称为key 的zset 中的元素member
+删除名称为key 的zset 中的元素member
 
 ```
 127.0.0.1:6379> zrem myzset two
@@ -694,7 +694,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 3、zincrby
 
-##### 如果在名称为key 的zset 中已经存在元素member，则该元素的score 增加increment；否则向集合中添加该元素，其score 的值为increment
+如果在名称为key 的zset 中已经存在元素member，则该元素的score 增加increment；否则向集合中添加该元素，其score 的值为increment
 
 ```
 127.0.0.1:6379[1]> zadd myzset3 1 "one"
@@ -712,7 +712,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 4、zrank
 
-##### 返回名称为key 的zset 中member 元素的排名(按score 从小到大排序)即下标
+返回名称为key 的zset 中member 元素的排名(按score 从小到大排序)即下标
 
 ```
 127.0.0.1:6379[1]> zrank myzset3 two
@@ -721,7 +721,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 5、zrevrank
 
-##### 返回名称为key 的zset 中member 元素的排名(按score 从大到小排序)即下标
+返回名称为key 的zset 中member 元素的排名(按score 从大到小排序)即下标
 
 ```
 127.0.0.1:6379[1]> zrevrank myzset3 two
@@ -730,7 +730,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 6、zrevrange
 
-##### 返回名称为key 的zset（按score 从大到小排序）中的index 从start 到end 的所有元素
+返回名称为key 的zset（按score 从大到小排序）中的index 从start 到end 的所有元素
 
 ```
 127.0.0.1:6379[1]> zrevrange myzset3 0 -1 withscores
@@ -742,7 +742,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 7、zrangebyscore
 
-##### 返回集合中score 在给定区间的元素
+返回集合中score 在给定区间的元素
 
 ```
 127.0.0.1:6379[1]> zrangebyscore myzset3 2 3 withscores
@@ -754,7 +754,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 8、zcount
 
-##### 返回集合中score 在给定区间的数量
+返回集合中score 在给定区间的数量
 
 ```
 127.0.0.1:6379[1]> zcount myzset3 2 3
@@ -763,7 +763,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 9、zcard
 
-##### 返回集合中元素个数
+返回集合中元素个数
 
 ```
 127.0.0.1:6379[1]> zcard myzset3
@@ -772,7 +772,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 10、zscore
 
-##### 返回给定元素对应的score
+返回给定元素对应的score
 
 ```
 127.0.0.1:6379[1]> zscore myzset3 one
@@ -781,7 +781,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 11、zremrangebyrank
 
-##### 删除集合中排名在给定区间的元素
+删除集合中排名在给定区间的元素
 
 ```
 127.0.0.1:6379[1]> zremrangebyrank myzset3 1 1
@@ -792,7 +792,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 12、zremrangebyscore
 
-##### 删除集合中score 在给定区间的元素
+删除集合中score 在给定区间的元素
 
 ```
 127.0.0.1:6379[1]> zremrangebyscore myzset3 2 2  //删除score为2的two
@@ -807,7 +807,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 1、keys
 
-##### 返回满足给定pattern 的所有key
+返回满足给定pattern 的所有key
 
 ```
 127.0.0.1:6379[1]> keys *  //取出所有key
@@ -822,7 +822,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 2、exists
 
-##### 确认一个key 是否存在
+确认一个key 是否存在
 
 ```
 3) "myset1"
@@ -834,7 +834,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 3、del
 
-##### 删除一个key
+删除一个key
 
 ```
 127.0.0.1:6379[1]> del myset1
@@ -845,7 +845,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 4、expire
 
-##### 设置一个key 的过期时间(单位:秒)
+设置一个key 的过期时间(单位:秒)
 
 ```
 127.0.0.1:6379[1]> expire myset 10
@@ -858,7 +858,7 @@ two 被设置了2 次，以最后一次的设置为准.
 
 #### 5、move
 
-##### 将当前数据库中的key 转移到其它数据库中
+将当前数据库中的key 转移到其它数据库中
 
 ```
 27.0.0.1:6379[1]> set age 30
@@ -877,7 +877,7 @@ OK
 
 #### 6、persist
 
-##### 移除给定key 的过期时间
+移除给定key 的过期时间
 
 ```
 127.0.0.1:6379[2]> expire age 300
@@ -894,7 +894,7 @@ OK
 
 #### 7、randomkey
 
-##### 随机返回key 空间的一个key
+随机返回key 空间的一个key
 
 ```
 127.0.0.1:6379[2]> randomkey
@@ -903,7 +903,7 @@ OK
 
 #### 8、rename
 
-##### 重命名
+重命名
 
 ```
 127.0.0.1:6379[2]> rename age age-new
@@ -916,7 +916,7 @@ OK
 
 #### 9、type
 
-##### 返回值的类型
+返回值的类型
 
 ```
 127.0.0.1:6379[2]> type sex
@@ -931,7 +931,7 @@ hash
 
 #### 1、ping
 
-##### 测试连接是否存活
+测试连接是否存活
 
 ```
 127.0.0.1:6379[2]> ping
@@ -940,7 +940,7 @@ PONG                            //表示连接成功
 
 #### 2、echo
 
-##### 在命令行打印一些内容
+在命令行打印一些内容
 
 ```
 127.0.0.1:6379[2]> echo hahaha
@@ -949,7 +949,7 @@ PONG                            //表示连接成功
 
 #### 3、select
 
-##### 选择数据库。Redis 数据库编号从0~15，我们可以选择任意一个数据库来进行数据的存取
+选择数据库。Redis 数据库编号从0~15，我们可以选择任意一个数据库来进行数据的存取
 
 ```
 127.0.0.1:6379[2]> select 5
@@ -960,7 +960,7 @@ OK
 
 #### 4、quit
 
-##### 退出连接
+退出连接
 
 ```
 127.0.0.1:6379> quit
@@ -969,7 +969,7 @@ C:\Users\20190712133>
 
 #### 5、dbsize
 
-##### 返回当前数据库中key 的数目
+返回当前数据库中key 的数目
 
 ```
 127.0.0.1:6379> dbsize
@@ -978,7 +978,7 @@ C:\Users\20190712133>
 
 #### 6、info
 
-##### 获取服务器的信息和统计
+获取服务器的信息和统计
 
 ```
 127.0.0.1:6379> info
@@ -1004,7 +1004,7 @@ config_file:
 
 #### 7、config get
 
-##### 获取服务器配置信息
+获取服务器配置信息
 
 ```
 127.0.0.1:6379> config get dir
@@ -1016,7 +1016,7 @@ config_file:
 
 #### 8、flushdb
 
-##### 删除当前选择数据库中的所有key
+删除当前选择数据库中的所有key
 
 ```
 127.0.0.1:6379> select 1
@@ -1031,7 +1031,7 @@ OK
 
 #### 9、flushall
 
-##### 删除所有数据库中的所有key
+删除所有数据库中的所有key
 
 ![1567048751394](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1567048751394.png)
 

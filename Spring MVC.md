@@ -6,7 +6,7 @@
 
 ![1566614696860](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1566614696860.png)
 
-###### 步骤描述：
+步骤描述：
 
 第一步：用户发起HTTP请求，web服务器收到请求、若匹配到DispatcherServlet的请求映射路径（在web.xml中指定），则web容器将请求转交给DispatcherServlet处理。
 第二步：DispatcherServlet根据请求信息，及HandlerMapping配置（可以根据xml配置、注解进行查找）查找Handler
