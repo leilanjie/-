@@ -1,12 +1,12 @@
 # Spring
 
-### 一、springt体系结构
+### 1 springt体系结构
 
 ![1566630714284](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1566630714284.png)
 
-### 二、简单案例
+### 2 简单案例
 
-##### 1、配置web.xml文件
+##### 2.1 配置web.xml文件
 
 ```java
  <context-param>
@@ -21,7 +21,7 @@
  </listener>
 ```
 
-##### 2、配置spring配置文件
+##### 2.2 配置spring配置文件
 
 ```java
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -35,7 +35,7 @@
 </beans>
 ```
 
-##### 3、编写程序
+##### 2.3 编写程序
 
 ```java
 public class HelloWorld {
@@ -60,17 +60,19 @@ public class MainApp {
 }
 ```
 
-##### 4、执行程序
+##### 2.4 执行程序
 
 ```java
 Your Message : Hello World!
 ```
 
-### 三、IoC(控制反转)
+### 3、IoC(控制反转)
 
-#### 1、依赖注入的三种类型：构造函数注入、属性注入和接口注入。
+##### 3.1 依赖注入
 
-##### 构造函数注入
+三种类型：构造函数注入、属性注入和接口注入。
+
+构造函数注入
 
 ```java
 public class MoAttack{
@@ -81,7 +83,7 @@ public class MoAttack{
 }
 ```
 
-##### 属性注入
+属性注入
 
 ```java
 public class MoAttack{
@@ -92,7 +94,7 @@ public class MoAttack{
 }
 ```
 
-##### 接口注入
+接口注入
 
 ```java
 public class MoAttack implements ActorArrangable{
@@ -104,9 +106,9 @@ public class MoAttack implements ActorArrangable{
 }
 ```
 
-##### ApplicationContext配置
+##### 3.2 ApplicationContext配置
 
-##### 基于注解的配置信息提供类Bean
+基于注解的配置信息提供类Bean
 
 ```java
 @Configuration
@@ -117,7 +119,7 @@ public class Beans{
 }
 ```
 
-##### spring基于xml配置
+spring基于xml配置
 
 ```java
 <beans 
@@ -133,7 +135,7 @@ public class Beans{
        xmlns:tx="http://www.springframework.org/schema/tx"
 ```
 
-##### 基于注解的配置
+基于注解的配置
 
 @Component注解，细分为各层注解：
 
@@ -149,7 +151,7 @@ public class Beans{
 <context:component-scan base-package="com.study.service"/>
 ```
 
-##### 自动装配Bean
+自动装配Bean
 
 ```java
 @Service
@@ -163,7 +165,9 @@ public class UserService {
     }
 ```
 
-### 四、spring AOP
+### 4 spring AOP
+
+##### 4.1 关键词介绍
 
 连接点（joinpoint）:在方法调用前后、抛出异常时及方法调用前后程序执行点织入增强
 
@@ -177,7 +181,7 @@ public class UserService {
 
 Aspectj是语言级的AOP实现
 
-##### 使用Aspectj的一个小例子：
+##### 4.2 使用Aspectj的例子
 
 ```java
 public class NaiveWaiter implements Waiter{
@@ -223,7 +227,7 @@ greet to John...
 serving John...
 ```
 
-##### 通过配置使用@AspectJ
+通过配置使用@AspectJ
 
 ```java
 <!--目标bean -->
@@ -237,7 +241,7 @@ serving John...
 	<bean     class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
 ```
 
-##### @AspectJ语法基础
+##### 4.3 @AspectJ语法基础
 
 ![1567134786999](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1567134786999.png)
 
@@ -245,7 +249,7 @@ serving John...
 
 ![1567134856726](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1567134856726.png)
 
-###### 通配符：
+通配符：
 
 *：匹配任意字符，只能匹配上下文中的一个元素
 
@@ -253,7 +257,7 @@ serving John...
 
 +：表示按类型匹配指定类的所有类，必须跟在类名后面，如com.smart.Car+。继承或扩展指定类的所有类。
 
-###### 增强类型：
+##### 4.4 增强类型
 
 1、@Before  前置增强，相当于BeforeAdvice
 
@@ -273,9 +277,9 @@ serving John...
 
 6、@DeclareParents  引介增强
 
-##### 切点函数详解
+切点函数详解
 
-###### @annotation   标注某个注解的所有方法。
+@annotation   标注某个注解的所有方法。
 
 ```java
 @Aspect
@@ -337,11 +341,11 @@ public class PointcutFunTest{
  needTestFun() executed!
 ```
 
-##### execution
+execution
 
 语法：execution(<修饰符模式>？<返回类型模式><方法名模式>(<参数模式>) <异常模式>？)
 
-##### within
+within
 
 语法：within(<类匹配模式>)    within(com.smart.NaiveWaiter)
 
@@ -349,13 +353,13 @@ public class PointcutFunTest{
 
 ​        within(com.smart..*):匹配com.smart包及子孙包中的类
 
-##### target
+target
 
 语法：target(M)    
 
 ​           target(com.smart.Waiter):NaiveWaiter、naughtyWaiter及CuteNaiveWaiter的所有方法都匹配切点
 
-##### 后置增强
+###### 4.4.1 后置增强
 
 ```java
 <aop:config proxy-target-class="true">
@@ -366,7 +370,7 @@ public class PointcutFunTest{
 </aop:config>             //returning属性必须和增强方法的入参名一致
 ```
 
-##### 环绕增强
+###### 4.4.2 环绕增强
 
 ```java
 <aop:config proxy-target-class="true">
@@ -377,7 +381,7 @@ public class PointcutFunTest{
 </aop:config>   
 ```
 
-##### 抛出异常增强
+###### 4.4.3 抛出异常增强
 
 ```java
 <aop:config proxy-target-class="true">
@@ -389,7 +393,7 @@ public class PointcutFunTest{
 </aop:config>   
 ```
 
-##### Final增强
+###### 4.4.4 Final增强
 
 ```java
 <aop:config proxy-target-class="true">
@@ -400,7 +404,7 @@ public class PointcutFunTest{
 </aop:config> 
 ```
 
-##### 引介增强
+###### 4.4.5 引介增强
 
 ```java
 <aop:config proxy-target-class="true">
@@ -413,9 +417,9 @@ public class PointcutFunTest{
  </aop:config>
 ```
 
-### 五、整合ORM框架
+### 5 整合ORM框架
 
-#### 1、使用jdbcTemplate
+#### 5.1 使用jdbcTemplate
 
 定义DataSource——定义JdbcTemplate——声明一个抽象的<bean>——配置具体的DAO
 
@@ -463,9 +467,9 @@ public class UserDao {
   }
 ```
 
-#### 2、在Spring中使用Hibernate
+#### 5.2 在Spring中使用Hibernate
 
-###### 移除了hibernate文件配置
+移除了hibernate文件配置
 
 ```java
 <bean id="dataSource"
@@ -562,9 +566,9 @@ public class User extends BaseDomain{
         <property name="packagesToScan" value="com.smart.domain" />
 ```
 
-### 六、Spring的事务管理
+### 6 Spring的事务管理
 
-1、实现事务管理的第一步是配置相应的事务管理器：
+##### 6.1 配置事务管理器：
 
 SpringJDBC和Mybatis都是基于数据源的Connection访问数据库，所以使用DataSourceTransactionManager事务管理器，配置如下：
 
@@ -597,7 +601,7 @@ SpringJDBC和Mybatis都是基于数据源的Connection访问数据库，所以�
 
 Hibernate使用org.hibernate.Session封装Connection,所以需要能创建session的SessionFactory.
 
-2、基于aop/tx命名空间的配置
+##### 6.2 基于aop/tx命名空间的配置
 
 ```java
 <aop:config proxy-target-class="true">

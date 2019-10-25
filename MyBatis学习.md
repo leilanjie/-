@@ -1,6 +1,6 @@
 ## MyBatis学习
 
-### 一、Mybatis工作原理
+### 1、Mybatis工作原理
 
 1、mybatis工作原理图：
 
@@ -95,7 +95,7 @@ SqlSession sqlSession = sessionFactory.openSession(true);
 ForumMapper userMapper = sqlSession.getMapper(UserDao.class);
 ```
 
-### 二、spring中配置Mybatis
+### 2、spring中配置Mybatis
 
 ****简化配置
 
@@ -168,11 +168,51 @@ public class UserService {
 
 ![1566453122160](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1566453122160.png)
 
-##### 三、在IDEA中添加mybatis配置文件
+### 3、在IDEA中添加mybatis配置文件
 
 ![1566380751093](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1566380751093.png)
 
-#### 四、mybatis缓存机制
+### 4、Mybatis分页插件PageHepler
+
+1、引入依赖
+
+```java
+<dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.8</version>
+</dependency>
+```
+
+2、配置全局文件
+
+```java
+<plugins>
+        <!--这里要写成PageInterceptor, 5.0之前的版本都是写PageHelper,
+         5.0之后要换成PageInterceptor-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--reasonable：分页合理化参数，默认值为false,直接根据参数进行查询。
+             当该参数设置为 true 时，pageNum<=0 时会查询第一页，
+             pageNum>pages（超过总数时），会查询最后一页。-->
+            <property name="reasonable" value="false"/>
+        </plugin>
+</plugins>
+```
+
+3、使用分页
+
+```java
+@PostMapping("/getUser")
+    public String getUser(int userId,int pageNum,int pageSize){
+        //PageHelper.startPage()后面一定要执行SQL语句
+        PageHelper.startPage(pageNum,pageSize);
+        List<User> list = userService.getUser(userId);
+        PageInfo<User> info = new PageInfo<User>(list);
+        return JSON.toJSONString(info);
+    }
+```
+
+### 4、mybatis缓存机制
 
 mybatis的缓存分为两级：一级缓存、二级缓存
 
