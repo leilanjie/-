@@ -1,6 +1,6 @@
 # Spring MVC
 
-### 1、工作原理（体系架构）
+### 1 工作原理（体系架构）
 
 
 
@@ -17,7 +17,7 @@
 第七步：DispatcherServlet使用View对象对ModelAndView中的模型数据进行视图渲染，视图渲染将模型数据(在ModelAndView对象中)填充到request域
 第十一步：DispatcherServlet向用户响应结果
 
-### 2、配置DispatcherServlet
+### 2 配置DispatcherServlet
 
 ![1566615847913](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1566615847913.png)
 
@@ -31,7 +31,7 @@ contextConfigLocation: 指定spring配置文件的得资源路径。
 
 <servlet-mapping>指定DispatcherServlet处理所有以.html为后缀的Http请求。
 
-#### 2.1、一个简单的实例（大概认识）
+#### 2.1 一个简单的实例（大概认识）
 
 通过简单实例讲解SpringMVC开发过程
 
@@ -108,7 +108,7 @@ public class UserController {
 
 ![1566616188138](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1566616188138.png)
 
-#### 2.2、注解驱动的控制器
+#### 2.2 注解驱动的控制器
 
 类处的注解@RequestMapping("user")指定的URL相对于WEB应用的部署路径，而方法处指定的URL相对于类定义处指定的URL.
 
@@ -121,7 +121,7 @@ URL中的{xxx}占位符可以通过@PathVariable("xxx")绑定到操作方法的�
 @RequestMapping(headers = "content-type=text/*")
 ```
 
-### 3、请求处理方法签名
+### 3 请求处理方法签名
 
 ```java
 //1、请求参数按名称匹配的方法绑定到方法入参中，方法返回的字符串代表逻辑视图名
@@ -157,7 +157,7 @@ URL中的{xxx}占位符可以通过@PathVariable("xxx")绑定到操作方法的�
 
 @RestController=@ResponseBody+@Controller(疑问：什么时候使用@ResponseBody和@RequestBody?)
 
-### 4、处理模型数据
+### 4 处理模型数据
 
 输出模型数据途径：
 
@@ -186,11 +186,11 @@ public class test {
 //@SessionAttribute("user")会自动将本处理器中的任何处理方法属性名为user的模型属性透明的存储到HttpSession中。
 ```
 
-### 5、处理方法的数据绑定
+### 5 处理方法的数据绑定
 
 ![1566616658392](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1566616658392.png)
 
-#### 5.1、ConversionService
+#### 5.1 ConversionService
 
 完成JAVA类型转换工作：
 
@@ -222,7 +222,7 @@ private Date birthday;
 private long salary;
 ```
 
-#### 5.2、数据校验
+#### 5.2 数据校验
 
 Spring校验框架：定义Bean
 
@@ -249,13 +249,13 @@ public String handle62(@Valid @ModelAttribute("user") User user,
 <form:errors path="username" cssClass="errorClass"/>
 ```
 
-### 6、视图和视图解析器
+### 6 视图和视图解析器
 
 InternalResourceViewResolver//解析为URL文件，如JSP 
 
 模板视图：freeMarker,Excal,PDF,xml,json.
 
-##### 6.1、freeMarker 
+#### 6.1 freeMarker 
 
    文件名：***.ftl。
 
@@ -273,13 +273,13 @@ P:defaultEncoding="UTF-8">
 </props>
 ```
 
-##### 6.2、Excel
+#### 6.2 Excel
 
    继承AbstractXlsView类 //注意。Excel文档名称必须编码为iso-8859-1.
 
    在***-servlet.xml文件配置Bean.
 
-##### 6.3、输出XML
+#### 6.3 输出XML
 
    XML形式的视图对象为:MarshallingView
 
@@ -292,9 +292,9 @@ P:defaultEncoding="UTF-8">
 </bean>
 ```
 
-### 7、本地化解析
+### 7 本地化解析
 
-##### 7.1、cookieLocaleResolver
+#### 7.1 cookieLocaleResolver
 
 ```java
   <bean id="localeResolver"
@@ -305,14 +305,14 @@ class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
       p:defaultLocale="zh_CN"/>
 ```
 
-##### 7.2、sessionLocaleResolver
+#### 7.2 sessionLocaleResolver
 
 ```java
 <bean id="localeResolver"
  class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 ```
 
-##### 7.3、localeChangeInterceptor
+#### 7.3 localeChangeInterceptor
 
 ```java
 <mvc:interceptors> 

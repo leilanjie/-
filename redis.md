@@ -1035,3 +1035,117 @@ OK
 
 ![1567048751394](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1567048751394.png)
 
+## redis实现消息队列
+
+### 一、发布订阅模式
+
+消息发布：
+
+```java
+   /**
+     * 发布订阅
+     * @param channel
+     * @param message
+     * @return
+     */
+    @RequestMapping("/view")
+    @ResponseBody
+    public Map<String ,Object > testChannl(@RequestParam(value = "channel") 
+                 String channel,  @RequestParam (value = "message") String  message){
+        redisTemplate.convertAndSend(channel,message);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put ( "success ", true) ;
+        return map ;
+    }
+```
+
+消息监听：
+
+```java
+ /**
+     * 定义Redis的监听容器
+      * @return
+     */
+    @Bean
+    public RedisMessageListenerContainer initRedisContainer () {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        //Redis连接工厂
+        container.setConnectionFactory(connectionFactory);
+        //设置运行任务池
+        container.setTaskExecutor(initTaskScheduler());
+        //定义监听渠道，名称为topicl
+        Topic topic = new ChannelTopic("topic1");
+        //使用监听器监听Redis的消息
+        container.addMessageListener(listener, topic);
+        return container;
+    }
+```
+
+消息订阅：
+
+```java
+@Component
+public class RedisMessageListener implements MessageListener {
+
+    @Override
+    public void onMessage(Message message,byte[] pattern){
+        //消息体
+        String body = new String(message.getBody());
+        //渠道名称
+        String topic = new String(pattern);
+        System.out.println(body);
+        System.out.println(topic);
+    }
+}
+```
+
+测试：
+
+![1577179633906](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577179633906.png)
+
+![1577179581404](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577179581404.png)
+
+### 二、生产者/消费者模式
+
+原理：使用redis的list数据类型做队列，使用lpush/rpop,rpush/lpop方法实现消息的消费
+
+生产者：
+
+![1577179775834](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577179775834.png)
+
+消费者：
+
+![1577179861842](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577179861842.png)
+
+启动消费者与生产者线程：
+
+![1577179952333](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577179952333.png)
+
+测试：
+
+![1577180051020](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577180051020.png)
+
+当队列无消息时，进入阻塞：
+
+![1577181164381](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577181164381.png)
+
+当队列中有消息时自动唤醒并消费消息：
+
+![1577181255303](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577181255303.png)
+
+![1577181325506](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577181325506.png)
+
+## redis常见问题
+
+1、redisTemplate注入失败（注入后总显示null）
+
+解决办法：
+
+步骤一：在配置类中加入
+
+![1577104431684](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577104431684.png)
+
+步骤二：调用方式
+
+![1577104507098](C:\Users\20190712133\AppData\Roaming\Typora\typora-user-images\1577104507098.png)
+

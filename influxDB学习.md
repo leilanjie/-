@@ -58,7 +58,7 @@ SELECT "<field_key>","<field_key>"：返回多个field。
 
 SELECT "<field_key>","<tag_key>"：返回特定的field和tag，SELECT在包括一个tag时，必须至少指定一个field。
 
-SELECT "<field_key>"::field,"<tag_key>"::tag：返回特定的field和tag，::[field | tag]语法指定标识符的类型。 使用此语法来区分具有相同名称的field key和tag key。
+SELECT "<field_key>"::field,"<tag_key>"::tag：返回特定的field和tag，::[field | tag]语法指定标识符的类型。
 
 **FROM子句：**
 
@@ -88,16 +88,12 @@ time                   level description      location       water_level
 > SELECT "level description","location","water_level" FROM "h2o_feet"
 // 从measurement中选择特定的tag和field，并提供其标识符类型
 > SELECT "level description"::field,"location"::tag,"water_level"::field FROM "h2o_feet"
-// 从单个measurement查询所有field
-> SELECT *::field FROM "h2o_feet"
 // 从measurement中选择一个特定的field并执行基本计算
 > SELECT ("water_level" * 2) + 4 from "h2o_feet"
 // 从多个measurement中查询数据
 > SELECT * FROM "h2o_feet","h2o_pH"
 // 从完全限定的measurement中选择所有数据
 > SELECT * FROM "NOAA_water_database"."autogen"."h2o_feet"
-// 从特定数据库中查询measurement的所有数据
-> SELECT * FROM "NOAA_water_database".."h2o_feet"
 ```
 
 ##### 2.2、Where
@@ -110,28 +106,20 @@ SELECT_clause FROM_clause WHERE <conditional_expression> [(AND|OR) <conditional_
 
 **##### fields**
 
-`WHERE`子句支持field value是字符串，布尔型，浮点数和整数这些类型。 
-在`WHERE`子句中**单引号**来表示字符串字段值。具有**无引号**字符串字段值或**双引号**字符串字段值的查询**将不会返回任何数据**，并且在大多数情况下**也不会返回错误**。
+`WHERE`子句支持field value是字符串，布尔型，浮点数和整数。 
+在`WHERE`子句中**单引号**来表示字符串字段值。无引号字符串字段值或双引号字符串字段值的查询不会返回任何数据，并且在大多数情况下也不会返回错误。
 
-语法结构
+语法：
 
 ```sql
 field_key <operator> ['string' | boolean | float | integer]
 ```
 
-支持的操作符：
-
-`=` 等于 
-`<>` 不等于 
-`!=` 不等于 
-`>` 大于 
-`>=` 大于等于 
-`<` 小于 
-`<=` 小于等于
+支持的操作符：`=` 等于 `<>` 不等于 `!=` 不等于 `>` 大于 `>=` 大于等于 `<` 小于 `<=` 小于等于
 
 **##### tags**
 
-`WHERE`子句中的用单引号来把tag value引起来。具有未用单引号的tag或双引号的tag查询将不会返回任何数据，并且在大多数情况下不会返回错误。
+`WHERE`子句中的用单引号来把tag value引起来
 
 ```sql
 tag_key <operator> ['tag_value']
@@ -139,7 +127,7 @@ tag_key <operator> ['tag_value']
 
 **##### timestamps** 
 
-对于大多数SELECT语句，默认时间范围为UTC的1677-09-21 00：12：43.145224194到2262-04-11T23：47：16.854775806Z。 对于只有GROUP BY time()子句的SELECT语句，默认时间范围在UTC的1677-09-21 00：12：43.145224194和now()之间。
+对于大多数SELECT语句，默认时间范围为UTC的1677-09-21 00:12:43.145224194到2262-04-11T23:47:16.854775806Z。 对于只有GROUP BY time()子句的SELECT语句，默认时间范围在UTC的1677-09-21 00：12：43.145224194和now()之间。
 
 ```sql
 // 查询有特定field的key value为字符串的数据
@@ -219,13 +207,11 @@ time                   mean
 SELECT <function>(<field_key>) FROM_clause WHERE <time_range> GROUP BY time(<time_interval>),[tag_key] [fill(<fill_option>)]
 ```
 
-time(time_interval,offset_interval) ： time_interval是一个时间duration。决定了InfluxDB按什么时间间隔group by。例如：time_interval为5m则在WHERE子句中指定的时间范围内将查询结果分到五分钟时间组里。
+time(time_interval,offset_interval) ：决定InfluxDB按什么时间间隔group by
 
 offset_interval是一个持续时间。它向前或向后移动InfluxDB的预设时间界限。offset_interval可以为正或负。
 
-fill(<fill_option>) ：可选的，它会更改不含数据的时间间隔的返回值。
-
-覆盖范围：基本GROUP BY time()查询依赖于time_interval，offset_interval和InfluxDB的预设时间边界来确定每个时间间隔中包含的原始数据以及查询返回的时间戳。
+fill(<fill_option>) ：可选
 
 **example:**
 
@@ -278,7 +264,7 @@ time                   mean
 SELECT_clause INTO <measurement_name> FROM_clause [WHERE_clause] [GROUP_BY_clause]
 ```
 
-INTO <measurement_name>：写入到特定measurement中，用CLI时，写入到用USE指定的数据库，保留策略为DEFAULT，用HTTP API时，写入到db参数指定的数据库，保留策略为DEFAULT。
+INTO <measurement_name>：写入到特定measurement中
 INTO <database_name>.<retention_policy_name>.<measurement_name>：写入到完整指定的measurement中。
 INTO <database_name>..<measurement_name>：写入到指定数据库保留策略为DEFAULT。
 INTO <database_name>.<retention_policy_name>.:MEASUREMENT FROM /<regular_expression>/：将数据写入与FROM子句中正则表达式匹配的用户指定数据库和保留策略的所有measurement。 :MEASUREMENT是对FROM子句中匹配的每个measurement的反向引用。（相当于从一个库的这些表，拷贝到新数据源的同名表下）
@@ -338,7 +324,7 @@ time                   mean
 
 ##### 2.6 OFFSET 和 SOFFSET 
 
-`OFFSET <N> `   从查询结果中返回分页的N个数据点 
+`OFFSET <N> `   从查询结果中返回分页的N个points
 `SOFFSET <M>  `  从查询结果中返回分页的M个series
 
 ```sql
@@ -388,11 +374,6 @@ time                       water_level
 
 ##### 2.9 Time syntax
 
-对于大多数SELECT语句，默认时间范围为UTC的1677-09-21 00：12：43.145224194到2262-04-11T23:47：16.854775806Z。 对于具有GROUP BY time()子句的SELECT语句，默认时间范围在UTC的1677-09-21 00:12:43.145224194和now()之间。以下部分详细说明了如何在SELECT语句的WHERE子句中指定替代时间范围。
-
-**### 绝对时间** 
-用时间字符串或是epoch时间来指定绝对时间
-
 语法：
 
 ```sql
@@ -413,7 +394,9 @@ InfluxDB不再支持在`WHERE`的绝对时间里面使用`OR`。
 Epoch时间是1970年1月1日星期四00:00:00（UTC）以来所经过的时间。默认情况下，InfluxDB假定所有epoch时间戳都是纳秒。也可以在epoch时间戳的末尾包括一个表示时间精度的字符，以表示除纳秒以外的精度
 
 **##### 基本算术** 
-所有时间戳格式都支持基本算术。用表示时间精度的字符添加（+）或减去（-）一个时间。请注意，InfluxQL需要+或-和表示时间精度的字符之间用空格隔开。
+所有时间戳格式都支持基本算术。用表示时间精度的字符添加或减去一个时间。
+
+注意，InfluxQL中 +或- 之间用空格隔开。
 
 **example:**
 
@@ -443,7 +426,7 @@ time                   water_level
 ```
 
 **### 相对时间** 
-使用`now()`查询时间戳相对于服务器当前时间戳的数据
+使用`now()`查询的时间戳是相对于服务器当前时间戳的数据
 
 语法：
 
@@ -480,8 +463,6 @@ InfluxQL不支持在`WHERE`中使用正则表达式去匹配不是字符串的fi
 ```sql
 SELECT /<regular_expression_field_key>/ FROM /<regular_expression_measurement>/ WHERE [<tag_key> <operator> /<regular_expression_tag_value>/ | <field_key> <operator> /<regular_expression_field_value>/] GROUP BY /<regular_expression_tag_key>/
 ```
-
-正则表达式前后使用斜杠`/`，并且使用[Golang的正则表达式语法](http://golang.org/pkg/regexp/syntax/)
 
 支持的操作符：
 
@@ -540,7 +521,7 @@ time                   water_level
 
 **Cast 操作**
 
- `::` 语法用户在查询中执行基本的cast操作,目前，InfluxDB支持将field值从 integers 转换 floats或者从 floats转换成 integers.
+ `::` 执行基本的cast操作,目前，InfluxDB支持将field值从 integers 转换 floats或者从 floats转换成 integers.
 
 语法：
 

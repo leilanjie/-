@@ -66,7 +66,7 @@ public class MainApp {
 Your Message : Hello World!
 ```
 
-### 3、IoC(控制反转)
+### 3 IoC(控制反转)
 
 ##### 3.1 依赖注入
 
@@ -419,7 +419,7 @@ target
 
 ### 5 整合ORM框架
 
-#### 5.1 使用jdbcTemplate
+##### 5.1 使用jdbcTemplate
 
 定义DataSource——定义JdbcTemplate——声明一个抽象的<bean>——配置具体的DAO
 
@@ -467,7 +467,7 @@ public class UserDao {
   }
 ```
 
-#### 5.2 在Spring中使用Hibernate
+##### 5.2 在Spring中使用Hibernate
 
 移除了hibernate文件配置
 

@@ -212,7 +212,7 @@ public class UserService {
     }
 ```
 
-### 4、mybatis缓存机制
+### 5、mybatis缓存机制
 
 mybatis的缓存分为两级：一级缓存、二级缓存
 
@@ -220,17 +220,17 @@ mybatis的缓存分为两级：一级缓存、二级缓存
 
 二级缓存是mapper级别的缓存，同一个namespace公用这一个缓存，所以对SqlSession是共享的
 
-##### 一级缓存：
+##### 一级缓存
 
 　　mybatis的一级缓存是SqlSession级别的缓存，在操作数据库的时候需要先创建SqlSession会话对象，在对象中有一个HashMap用于存储缓存数据，此HashMap是当前会话对象私有的，别的SqlSession会话对象无法访问。
 
-##### 具体流程：
+##### 具体流程
 
 1.第一次执行select完毕会将查到的数据写入SqlSession内的HashMap中缓存起来
 
 2.第二次执行select会从缓存中查数据，如果select相同切传参数一样，那么就能从缓存中返回数据，不用去数据库了，从而提高了效率
 
-##### 注意事项：
+##### 注意事项
 
 1.如果SqlSession执行了DML操作（insert、update、delete），并commit了，那么mybatis就会清空当前SqlSession缓存中的所有缓存数据，这样可以保证缓存中的存的数据永远和数据库中一致，避免出现脏读
 
@@ -238,7 +238,7 @@ mybatis的缓存分为两级：一级缓存、二级缓存
 
 3.mybatis的缓存是基于[namespace:sql语句:参数]来进行缓存的，SqlSession的HashMap存储缓存数据时，是使用[namespace:sql:参数]作为key，查询返回的语句作为value保存的。
 
-**二级缓存：**
+**二级缓存**
 
 1、二级缓存是mapper级别的缓存，也就是同一个namespace的mappe.xml，当多个SqlSession使用同一个Mapper操作数据库的时候，得到的数据会缓存在同一个二级缓存区域
 
@@ -262,12 +262,12 @@ mybatis的缓存分为两级：一级缓存、二级缓存
 <select id="getCountByName" parameterType="java.util.Map" resultType="INTEGER" statementType="CALLABLE" useCache="false">
 ```
 
-##### 具体流程：
+##### 具体流程
 
 1.当一个sqlseesion执行了一次select后，在关闭此session的时候，会将查询结果缓存到二级缓存
 
 2.当另一个sqlsession执行select时，首先会在他自己的一级缓存中找，如果没找到，就回去二级缓存中找，找到了就返回，就不用去数据库了，从而减少了数据库压力提高了性能　
 
-##### 注意事项：
+##### 注意事项
 
 如果SqlSession执行了DML操作（insert、update、delete），并commit了，那么mybatis就会清空当前mapper缓存中的所有缓存数据，这样可以保证缓存中的存的数据永远和数据库中一致，避免出现脏读.
